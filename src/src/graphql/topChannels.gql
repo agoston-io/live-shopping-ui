@@ -1,0 +1,21 @@
+query topChannels {
+  topChannels: channels(
+    orderBy: BROADCASTS_SUM_LIKED_DESC
+    first: 10
+  ) {
+    nodes {
+      id
+      name
+      user {
+        username
+      }
+      broadcasts {
+        groupedAggregates(groupBy: CHANNEL_ID) {
+          sum {
+            liked
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+query oneBroadcast($id: Int, $channelId: Int) {
+  oneBroadcast: broadcasts(
+    condition: {id: $id, channelId: $channelId},
+    orderBy: LIVE_STARTED_AT_DESC,
+    first: 1
+  ) {
+    nodes {
+      id
+      name
+      jsonSample
+      channelId
+      channel {
+        id
+        name
+      }
+    }
+  }
+}

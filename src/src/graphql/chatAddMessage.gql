@@ -1,0 +1,9 @@
+mutation createChatMessage ($broadcast_id: Int!,$message: String!) {
+  createChat(input: {chat: {broadcastId: $broadcast_id, content: $message}}) {
+    chat {
+      id
+      content
+      createdAt
+    }
+  }
+}

@@ -1,0 +1,8 @@
+query products ( $channelId: Int!, $first: Int!)  {
+  products: products(condition: {channelsId: $channelId}, first: $first) {
+    nodes {
+      name
+      price
+    }
+  }
+}

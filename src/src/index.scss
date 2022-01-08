@@ -1,0 +1,58 @@
+@import "./fonts.scss";
+
+// Containers
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1400px,
+);
+
+// theme
+$primary: #517ee0 !default;
+$secondary: #404040 !default;
+$body-bg: #1c1e21 !default;
+$body-color: #fff !default;
+
+// links
+//$link-color: #0366d6 !default;
+$link-decoration: none !default;
+$link-hover-decoration: none !default;
+
+// Fonts
+$font-size-base: 1rem !default;
+$font-family-base: "Avenir Book" !default;
+$font-weight-base: 200 !default;
+
+// Headings
+$headings-font-family: "Avenir Black" !default;
+$headings-font-weight: 300 !default;
+$headings-line-height: 1.2 !default;
+$h1-font-size: $font-size-base * 3 !default;
+$h2-font-size: $font-size-base * 2.25 !default;
+$h3-font-size: $font-size-base * 1.8 !default;
+$h4-font-size: $font-size-base * 1.4 !default;
+$h5-font-size: $font-size-base * 1 !default;
+$h6-font-size: $font-size-base * 0.9 !default;
+
+// Buttons
+$input-btn-font-family: "Avenir Black" !default;
+$btn-link-color: #fff !default;
+$btn-link-hover-color: #fff !default;
+$btn-link-disabled-color: #7e7e7e !default;
+$btn-font-weight: 300 !default;
+
+// Forms
+$input-padding-y: 6px;
+$input-padding-x: 13px;
+$input-font-weight: 400;
+$input-border-radius: 8px;
+$input-color: #fff;
+
+@import "bootstrap/scss/bootstrap.scss";
+
+// Overloading
+.btn-primary {
+    color: #fff;
+}

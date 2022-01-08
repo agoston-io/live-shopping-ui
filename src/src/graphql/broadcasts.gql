@@ -1,0 +1,27 @@
+query broadcasts ($after: Cursor, $channelId: Int) {
+  broadcasts: broadcasts(
+    first: 10
+    orderBy: LIVE_STARTED_AT_DESC,
+    after: $after
+    condition: {channelId: $channelId}
+  ) {
+    edges {
+      node {
+        id
+        name
+        videoUrl
+        liveStartedAt
+        liveEndedAt
+        liked
+        channel {
+          id
+          name
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

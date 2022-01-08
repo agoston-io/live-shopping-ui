@@ -1,0 +1,5 @@
+query countBroadcasts {
+  countBroadcasts: broadcasts  {
+    totalCount
+  }
+}
