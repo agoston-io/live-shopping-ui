@@ -1,6 +1,6 @@
 {
   "name": "live-shopping-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --host=192.168.56.50 --port 8081",

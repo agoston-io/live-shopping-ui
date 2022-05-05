@@ -148,7 +148,7 @@ export default {
               },
               context: {
                 headers: {
-                  RecaptchaToken: token,
+                  "Recaptcha-Token": token,
                 },
               },
             })
