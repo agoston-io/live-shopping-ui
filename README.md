@@ -27,7 +27,7 @@ with backend from [Agoston](https://agoston.io/).
 BASE_URL='<YOUR_FRONTEND_URL>'
 VUE_APP_BACKEND_GRAPHQL_URI='<BACKEND_GRAPHQL_URI>'
 VUE_APP_BACKEND_GRAPHQL_SUBSCRIPTION_URI='<BACKEND_GRAPHQL_WEBSOCKET _URI>''
-VUE_APP_RECAPTCHA_SITE_KEY= # For the chat feature
+VUE_APP_RECAPTCHA_SITE_KEY='' # For the chat feature
 ```
 
 4. Run the frontend
