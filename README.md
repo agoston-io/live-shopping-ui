@@ -37,7 +37,6 @@ cd src/.env
 npm run serve
 ```
 
-
 **NOTE:** Refer to the Agoston [quick start](https://docs.agoston.io/quickstart) for step by step tutorial.
 
 ## License
