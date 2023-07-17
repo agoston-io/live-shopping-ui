@@ -4,6 +4,7 @@
       <numberOfBroadcasts />
       <topChannels />
     </div>
+    {{ broadcasts }}
     <div class="col-12 col-lg-10 bg-dark">
       <div class="row">
         <div class="col-12" v-if="$apollo.queries.oneBroadcast.loading">
@@ -14,10 +15,7 @@
             <div class="col-12 col-lg-8 bg-dark">
               <div class="row">
                 <div class="col-12 p-0">
-                  <img
-                    src="https://picsum.photos/800/400"
-                    class="card-img-top"
-                  />
+                  <img src="https://picsum.photos/800/400" class="card-img-top" />
                 </div>
                 <div class="col-12 py-0 px-1 mt-2">
                   <h4 class="mb-0 pb-0">
@@ -25,11 +23,8 @@
                   </h4>
                 </div>
                 <div class="col-12 py-0 px-1">
-                  <a
-                    v-bind:href="
-                      '?channel=' + oneBroadcast.nodes[0].channel.id
-                    "
-                  >
+                  <a v-bind:href="'?channel=' + oneBroadcast.nodes[0].channel.id
+                    ">
                     {{ oneBroadcast.nodes[0].channel.name }}
                   </a>
                 </div>
@@ -49,70 +44,46 @@
         <div class="col-12 mt-4 fs-4 px-1 px-lg-2">More Livestreams</div>
         <div class="col-12">
           <div class="row">
-            <div
-              class="col-12 col-lg-3 card p-0 p-lg-2 bg-transparent border-0"
-              v-for="item in broadcasts.edges"
-              :key="item.node.id"
-            >
+            <div class="col-12 col-lg-3 card p-0 p-lg-2 bg-transparent border-0" v-for="item in broadcasts.edges"
+              :key="item.node.id">
               <img src="https://picsum.photos/300/100" class="card-img-top" />
               <div class="card-body bg-dark px-1 px-lg-2">
-                <h5
-                  class="
+                <h5 class="
                     card-title
                     text-truncate
                     mb-0
                     d-flex
                     justify-content-between
-                  "
-                >
+                  ">
                   <a v-bind:href="'?broadcast=' + item.node.id">{{
                     item.node.name
                   }}</a>
                   <div>
-                    <font-awesome-icon
-                      class="me-1"
-                      :icon="['fas', 'thumbs-up']"
-                    />{{ item.node.liked }}
+                    <font-awesome-icon class="me-1" :icon="['fas', 'thumbs-up']" />{{ item.node.liked }}
                   </div>
                 </h5>
                 <p class="card-text text-truncate mb-0">
-                  <a
-                    v-bind:href="'?channel=' + item.node.channel.id"
-                  >
+                  <a v-bind:href="'?channel=' + item.node.channel.id">
                     {{ item.node.channel.name }}
                   </a>
                 </p>
-                <span
-                  class="
+                <span class="
                     position-absolute
                     top-0
                     end-0
                     badge
                     rounded-pill
                     bg-primary
-                  "
-                  style="margin-top: 15px; margin-right: 15px"
-                >
+                  " style="margin-top: 15px; margin-right: 15px">
                   {{ tsToNiceElapsed(item.node.liveEndedAt, "Live") }}
                 </span>
               </div>
             </div>
-            <div
-              class="col-3 card p-2 bg-transparent p-0 border-0"
-              v-if="!isMobile() && !$apollo.queries.broadcasts.loading"
-            >
-              <button
-                :class="{ 'd-none': !broadcasts.pageInfo.hasNextPage }"
-                v-on:click="fetchMoreBroadcasts"
-                class="btn btn-dark"
-                type="button"
-                style="height: 100%"
-              >
-                <font-awesome-icon
-                  class="me-1"
-                  :icon="['fas', 'angle-double-right']"
-                  size="4x"
-                />
+            <div class="col-3 card p-2 bg-transparent p-0 border-0"
+              v-if="!isMobile() && !$apollo.queries.broadcasts.loading">
+              <button :class="{ 'd-none': !broadcasts.pageInfo.hasNextPage }" v-on:click="fetchMoreBroadcasts"
+                class="btn btn-dark" type="button" style="height: 100%">
+                <font-awesome-icon class="me-1" :icon="['fas', 'angle-double-right']" size="4x" />
               </button>
             </div>
           </div>
@@ -190,7 +161,7 @@ export default {
       window.onscroll = () => {
         if (
           document.documentElement.scrollTop + window.innerHeight >=
-            document.documentElement.offsetHeight - 5 &&
+          document.documentElement.offsetHeight - 5 &&
           this.isMobile() &&
           !this.$apollo.queries.broadcasts.loading
         ) {

@@ -33,7 +33,9 @@ VUE_APP_RECAPTCHA_SITE_KEY='' # For the chat feature
 4. Run the frontend
 
 ```sh
-cd src/.env
+cd src
+# https://candid.technology/error-error-0308010c-digital-envelope-routines-unsupported/
+export NODE_OPTIONS=--openssl-legacy-provider
 npm run serve
 ```
 

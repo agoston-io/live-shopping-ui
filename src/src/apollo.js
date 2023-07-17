@@ -1,10 +1,8 @@
-
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
+import { ApolloClient, HttpLink, InMemoryCache, split } from '@apollo/client/core'
+import { onError } from '@apollo/client/link/error'
 import { relayStylePagination } from "@apollo/client/utilities";
-import { HttpLink } from 'apollo-link-http'
-import { split } from 'apollo-link'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
+import { WebSocketLink } from '@apollo/client/link/ws'
+import { getMainDefinition } from '@apollo/client/utilities'
 import { createApolloProvider } from '@vue/apollo-option'
 
 const apolloClientUri = process.env.VUE_APP_BACKEND_GRAPHQL_URI;
@@ -12,11 +10,15 @@ const apolloClientWebSocketUri = process.env.VUE_APP_BACKEND_GRAPHQL_SUBSCRIPTIO
 
 const httpLink = new HttpLink({
     uri: apolloClientUri,
+    credentials: 'include'
 })
 const wsLink = new WebSocketLink({
     uri: apolloClientWebSocketUri,
     options: {
         reconnect: true,
+        connectionParams: {
+            credentials: 'include',
+        },
     },
 })
 const link = split(
@@ -29,8 +31,19 @@ const link = split(
     httpLink
 )
 
+// Handle errors
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+        graphQLErrors.map(({ message, locations, stack }) => {
+            console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Stack: ${stack}`)
+        }
+        )
+    if (networkError) console.error(`[Network]: ${networkError}`)
+})
+
+
 const apolloClient = new ApolloClient({
-    link,
+    link: errorLink.concat(link),
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
