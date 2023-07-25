@@ -1,6 +1,6 @@
 import { createApp, h } from 'vue'
 import './index.scss'
-import apolloProvider from './apollo'
+import { AgostonClient } from '@agoston-io/client';
 import App from './App.vue'
 import { VueReCaptcha } from "vue-recaptcha-v3";
 // Boostrap
@@ -15,13 +15,22 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 // Sharing
 import VueSocialSharing from 'vue-social-sharing';
 
-createApp({
-    apollo: {},
-    render: () => h(App),
-})
-    .use(apolloProvider)
-    .use(VueReCaptcha, { siteKey: process.env.VUE_APP_RECAPTCHA_SITE_KEY })
-    .use(VueSocialSharing)
-    .component("font-awesome-icon", FontAwesomeIcon)
-    .mount('#app');
+
+AgostonClient({
+    backendUrl: process.env.VUE_APP_AGOSTON_BACKEND_URL
+}).then(agostonClient => {
+
+    const apolloProvider = agostonClient.createEmbeddedApolloProvider();
+
+    const app = createApp({
+        apollo: {},
+        render: () => h(App),
+    })
+    app.config.globalProperties.$agostonClient = agostonClient
+    app.use(apolloProvider)
+    app.use(VueReCaptcha, { siteKey: process.env.VUE_APP_RECAPTCHA_SITE_KEY })
+    app.use(VueSocialSharing)
+    app.component("font-awesome-icon", FontAwesomeIcon)
+    app.mount('#app');
+});
 

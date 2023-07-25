@@ -1,10 +1,21 @@
 <template>
   <div class="row">
+    <div class="col">
+      <form id="ssform" v-on:submit.prevent="onSubmit">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+        <button v-on:click="loginWithUserPassword">Login</button>
+      </form>
+    </div>
+    <button @click="$agostonClient.loginOrSignUpFromProvider({ strategyName: 'google-oauth20' })">LOGIN</button>
+    <button @click="$agostonClient.logout({ options: { redirectLogout: '/' } })">LOGOUT</button>
+    {{ $agostonClient.isAuthenticated() ? $agostonClient.userAuthData()?.displayName : "no connected" }}
     <div class="col-2" v-if="!isMobile()">
       <numberOfBroadcasts />
       <topChannels />
     </div>
-    {{ broadcasts }}
     <div class="col-12 col-lg-10 bg-dark">
       <div class="row">
         <div class="col-12" v-if="$apollo.queries.oneBroadcast.loading">
@@ -156,6 +167,17 @@ export default {
           after: this.broadcasts.pageInfo.endCursor,
         },
       });
+    },
+    async loginWithUserPassword() {
+      var login = await this.$agostonClient.loginOrSignUpWithUserPassword({
+        username: "ssdsqsd",
+        password: "cc5C*-ssss",
+      });
+      if (login.error) {
+        console.log("error ", login)
+      } else {
+        console.log("success ", login)
+      }
     },
     fetchMoreBroadcastsScrolling() {
       window.onscroll = () => {
