@@ -6,7 +6,6 @@ module.exports = {
             key: fs.readFileSync(process.env.VUE_APP_HTTPS_CERTIFICAT_KEY_PATH || '/dev/null'),
             cert: fs.readFileSync(process.env.VUE_APP_HTTPS_CERTIFICAT_PATH || '/dev/null'),
         },
-        public: process.env.BASE_URL,
         disableHostCheck: true
     },
     configureWebpack: {

@@ -1,20 +1,8 @@
 <template>
   <div class="row">
-    <div class="col">
-      <form id="ssform" v-on:submit.prevent="onSubmit">
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-        <button v-on:click="loginWithUserPassword">Login</button>
-      </form>
-    </div>
-    <button @click="$agostonClient.loginOrSignUpFromProvider({ strategyName: 'google-oauth20' })">LOGIN</button>
-    <button @click="$agostonClient.logout({ options: { redirectLogout: '/' } })">LOGOUT</button>
-    {{ $agostonClient.isAuthenticated() ? $agostonClient.userAuthData()?.displayName : "no connected" }}
     <div class="col-2" v-if="!isMobile()">
-      <numberOfBroadcasts />
-      <topChannels />
+      <NumberOfBroadcasts />
+      <TopChannels />
     </div>
     <div class="col-12 col-lg-10 bg-dark">
       <div class="row">
@@ -106,24 +94,24 @@
 
 <script>
 // Project libraries
-import tsToNiceElapsed from "../../tsToNiceElapsed.js";
-import isMobile from "../../isMobile.js";
+import tsToNiceElapsed from "../tsToNiceElapsed.js";
+import isMobile from "../isMobile.js";
 // Project components
 import BroadcastChat from "./BroadcastChat.vue";
 import ChannelProducts from "./ChannelProducts.vue";
-import numberOfBroadcasts from "./numberOfBroadcasts.vue";
-import topChannels from "./topChannels.vue";
+import NumberOfBroadcasts from "./NumberOfBroadcasts.vue";
+import TopChannels from "./TopChannels.vue";
 // GraphQL
-import ALL_BROADCASTS from "../../graphql/broadcasts.gql";
-import ONE_BROADCAST from "../../graphql/oneBroadcast.gql";
+import ALL_BROADCASTS from "../graphql/broadcasts.gql";
+import ONE_BROADCAST from "../graphql/oneBroadcast.gql";
 
 export default {
   name: "live-shopping",
   components: {
     BroadcastChat,
     ChannelProducts,
-    numberOfBroadcasts,
-    topChannels,
+    NumberOfBroadcasts,
+    TopChannels,
   },
   data() {
     return {
@@ -167,17 +155,6 @@ export default {
           after: this.broadcasts.pageInfo.endCursor,
         },
       });
-    },
-    async loginWithUserPassword() {
-      var login = await this.$agostonClient.loginOrSignUpWithUserPassword({
-        username: "ssdsqsd",
-        password: "cc5C*-ssss",
-      });
-      if (login.error) {
-        console.log("error ", login)
-      } else {
-        console.log("success ", login)
-      }
     },
     fetchMoreBroadcastsScrolling() {
       window.onscroll = () => {

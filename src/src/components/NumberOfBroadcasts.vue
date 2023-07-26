@@ -1,7 +1,9 @@
 <template>
   <div class="row">
     <div class="col-12">Number of broadcasts</div>
-    <div class="col-12"><hr class="mt-0" /></div>
+    <div class="col-12">
+      <hr class="mt-0" />
+    </div>
     <div class="col-12" v-if="$apollo.queries.countBroadcasts.loading">
       Loading...
     </div>
@@ -13,7 +15,7 @@
 
 <script>
 // GraphQL
-import COUNT_BROADCAST from "../../graphql/countBroadcasts.gql";
+import COUNT_BROADCAST from "../graphql/countBroadcasts.gql";
 
 export default {
   name: "number-of-broadcasts",

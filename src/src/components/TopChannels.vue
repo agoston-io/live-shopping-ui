@@ -1,16 +1,14 @@
 <template>
   <div class="row mt-4">
     <div class="col-12">Top Creators</div>
-    <div class="col-12"><hr class="mt-0 mb-0" /></div>
+    <div class="col-12">
+      <hr class="mt-0 mb-0" />
+    </div>
     <div class="col-12" v-if="$apollo.queries.topChannels.loading">
       Loading...
     </div>
     <div class="col-12" v-else>
-      <div
-        class="col-12 mt-2 fs-6 text-truncate"
-        v-for="item in topChannels.nodes"
-        :key="item.id"
-      >
+      <div class="col-12 mt-2 fs-6 text-truncate" v-for="item in topChannels.nodes" :key="item.id">
         <div class="d-flex justify-content-between">
           <a v-bind:href="'?channel=' + item.id"> {{ item.name }} </a><br />
           <span class="text-muted">
@@ -26,7 +24,7 @@
 
 <script>
 // GraphQL
-import TOP_CHANNELS from "../../graphql/topChannels.gql";
+import TOP_CHANNELS from "../graphql/topChannels.gql";
 
 export default {
   name: "top-channels",

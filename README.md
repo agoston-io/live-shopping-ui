@@ -5,6 +5,7 @@ with backend from [Agoston](https://agoston.io/).
 
 ## Features
 
+- Authentication with Google or user/password
 - Create unlimited channels
 - Create unlimited broadcasts per channel
 - Showcase unlimited products
@@ -12,22 +13,14 @@ with backend from [Agoston](https://agoston.io/).
 - Chat on broadcast
 - Very fast and responsive even with millions of broadcasts
 
-## Missing
-
-- Authentication
-- Interface with a live streaming provider (e.g. Amazon IVS)
-
 ## Install
 
 1. Go to [Agoston](https://agoston.io) and create a free account.
 2. In the pgAdmin console execute the SQL script in [src/data-model/live_shopping.sql](src/data-model/live_shopping.sql).
-3. Adujst the environment variables in `src/.env` to fit your environment:
+3. Adujst the environment variables in `src/.env` to fit your Agoston environment:
 
 ```env
-BASE_URL='<YOUR_FRONTEND_URL>'
-VUE_APP_BACKEND_GRAPHQL_URI='<BACKEND_GRAPHQL_URI>'
-VUE_APP_BACKEND_GRAPHQL_SUBSCRIPTION_URI='<BACKEND_GRAPHQL_WEBSOCKET _URI>''
-VUE_APP_RECAPTCHA_SITE_KEY='' # For the chat feature
+VUE_APP_AGOSTON_BACKEND_URL='<AGOSTON_BACKEND_URL>'
 ```
 
 4. Run the frontend

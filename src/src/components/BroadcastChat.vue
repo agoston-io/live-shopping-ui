@@ -1,10 +1,6 @@
 <template>
   <div class="card bg-dark">
-    <div
-      class="card-body"
-      style="height: 390px; overflow-y: scroll; overflow-x: hidden"
-      id="chat"
-    >
+    <div class="card-body" style="height: 390px; overflow-y: scroll; overflow-x: hidden" id="chat">
       <div class="col-12" v-if="$apollo.queries.oneChat.loading">
         Loading...
       </div>
@@ -17,11 +13,8 @@
           </p>
         </div>
         <div class="d-flex flex-row justify-content-start">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
-            alt="avatar 1"
-            style="width: 45px; height: 100%"
-          />
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp" alt="avatar 1"
+            style="width: 45px; height: 100%" />
           <div>
             <p class="small p-2 ms-3 mb-3 rounded-3 bg-secondary">
               {{ item.content }}
@@ -31,32 +24,19 @@
       </div>
       <!---->
     </div>
-    <div
-      class="
+    <div class="
         card-footer
         text-muted
         justify-content-start
         align-items-center
         p-0
-      "
-    >
+      ">
       <form @submit.prevent="onSubmit">
         <div class="input-group mb-0">
-          <input
-            id="chatInput"
-            type="text"
-            class="form-control"
-            v-model="v$.form.message.$model"
-            v-on:keyup.enter="postMessage"
-            required
-          />
-          <button
-            :disabled="v$.form.$invalid"
-            v-on:click="postMessage"
-            class="btn btn-primary"
-            type="button"
-            style="padding-top: 0.55rem"
-          >
+          <input id="chatInput" type="text" class="form-control" v-model="v$.form.message.$model"
+            v-on:keyup.enter="postMessage" required />
+          <button :disabled="v$.form.$invalid" v-on:click="postMessage" class="btn btn-primary" type="button"
+            style="padding-top: 0.55rem">
             <font-awesome-icon class="me-1" :icon="['far', 'paper-plane']" />
           </button>
         </div>
@@ -70,11 +50,11 @@
 import useVuelidate from "@vuelidate/core";
 import { required, minLength, maxLength } from "@vuelidate/validators";
 // JS Libraries
-import tsToNiceElapsed from "../../tsToNiceElapsed.js";
+import tsToNiceElapsed from "../tsToNiceElapsed.js";
 // GraphQL
-import ONE_CHAT from "../../graphql/oneChat.gql";
-import ONE_CHAT_SUBSCRIPTION from "../../graphql/oneChatSubscription.gql";
-import CHAT_SEND_MESSAGE from "../../graphql/chatAddMessage.gql";
+import ONE_CHAT from "../graphql/oneChat.gql";
+import ONE_CHAT_SUBSCRIPTION from "../graphql/oneChatSubscription.gql";
+import CHAT_SEND_MESSAGE from "../graphql/chatAddMessage.gql";
 
 export default {
   name: "broadcast-chat",
@@ -138,27 +118,25 @@ export default {
     postMessage() {
       const message = this.v$.form.message.$model;
       if (message.length > 0) {
-        this.$recaptcha("login").then((token) => {
-          this.$apollo
-            .mutate({
-              mutation: CHAT_SEND_MESSAGE,
-              variables: {
-                message: message,
-                broadcast_id: parseInt(this.broadcast_id),
+        this.$apollo
+          .mutate({
+            mutation: CHAT_SEND_MESSAGE,
+            variables: {
+              message: message,
+              broadcast_id: parseInt(this.broadcast_id),
+            },
+            context: {
+              headers: {
+                "Recaptcha-Token": token,
               },
-              context: {
-                headers: {
-                  "Recaptcha-Token": token,
-                },
-              },
-            })
-            .then(() => {
-              this.form.message = "";
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+            },
+          })
+          .then(() => {
+            this.form.message = "";
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     },
   },

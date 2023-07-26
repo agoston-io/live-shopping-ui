@@ -56,8 +56,6 @@ CREATE TABLE chats (
   CONSTRAINT chat_user_id FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
-COMMENT ON TABLE chats IS E'@recaptcha true';
-
 CREATE INDEX ON chats (user_id);
 
 CREATE INDEX chats_broadcast_id ON chats (broadcast_id);
