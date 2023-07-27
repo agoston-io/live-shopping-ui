@@ -1,7 +1,6 @@
 <template>
   <div class="row">
     <div class="col-2" v-if="!isMobile()">
-      <NumberOfBroadcasts />
       <TopChannels />
     </div>
     <div class="col-12 col-lg-10 bg-dark">
@@ -99,7 +98,6 @@ import isMobile from "../isMobile.js";
 // Project components
 import BroadcastChat from "./BroadcastChat.vue";
 import ChannelProducts from "./ChannelProducts.vue";
-import NumberOfBroadcasts from "./NumberOfBroadcasts.vue";
 import TopChannels from "./TopChannels.vue";
 // GraphQL
 import ALL_BROADCASTS from "../graphql/broadcasts.gql";
@@ -110,7 +108,6 @@ export default {
   components: {
     BroadcastChat,
     ChannelProducts,
-    NumberOfBroadcasts,
     TopChannels,
   },
   data() {

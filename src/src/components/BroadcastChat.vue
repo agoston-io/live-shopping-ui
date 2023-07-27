@@ -35,10 +35,11 @@
         <div class="input-group mb-0">
           <input id="chatInput" type="text" class="form-control" v-model="v$.form.message.$model"
             v-on:keyup.enter="postMessage" required />
-          <button :disabled="v$.form.$invalid" v-on:click="postMessage" class="btn btn-primary" type="button"
-            style="padding-top: 0.55rem">
+          <button v-if="$agostonClient.isAuthenticated()" :disabled="v$.form.$invalid" v-on:click="postMessage"
+            class="btn btn-primary" type="button" style="padding-top: 0.55rem">
             <font-awesome-icon class="me-1" :icon="['far', 'paper-plane']" />
           </button>
+          <router-link v-else class="btn btn-primary" :to="{ name: 'LoginPage' }">Login to chat</router-link>
         </div>
       </form>
     </div>
@@ -93,7 +94,7 @@ export default {
         document: ONE_CHAT_SUBSCRIPTION,
         variables() {
           return {
-            topic: `chats:broadcast_id:${parseInt(this.broadcast_id)}`,
+            topic: `chats`,
             broadcast_id: parseInt(this.broadcast_id),
           };
         },
@@ -124,12 +125,7 @@ export default {
             variables: {
               message: message,
               broadcast_id: parseInt(this.broadcast_id),
-            },
-            context: {
-              headers: {
-                "Recaptcha-Token": token,
-              },
-            },
+            }
           })
           .then(() => {
             this.form.message = "";
