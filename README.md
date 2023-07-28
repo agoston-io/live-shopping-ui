@@ -1,17 +1,19 @@
-# Live Shopping UI
+# Live shopping
 
-Live Shopping UI ([Demo](https://live-shopping-ui.agoston.io/))
-with backend from [Agoston](https://agoston.io/).
+Basic Live shopping was developed with Vue for the frontend and Agoston for the backend.
+
+- [Demo](https://live-shopping-ui.agoston.io)
+- [node package](https://www.npmjs.com/package/@agoston-io/client)
+- [Data model](./src/data-model/live_shopping.sql)
 
 ## Features
 
-- Authentication with Google or user/password
-- Create unlimited channels
-- Create unlimited broadcasts per channel
-- Showcase unlimited products
-- Infinite scroll of broadcast on mobile
-- Chat on broadcast
-- Very fast and responsive even with millions of broadcasts
+- Authentication with user/password
+- Create channels
+- Create broadcasts per channel
+- Showcase products
+- Chat per broadcast
+- Fast and responsive (even with millions of broadcasters)
 
 ## Install
 
@@ -27,12 +29,10 @@ VUE_APP_AGOSTON_BACKEND_URL='<AGOSTON_BACKEND_URL>'
 
 ```sh
 cd src
-# https://candid.technology/error-error-0308010c-digital-envelope-routines-unsupported/
+# For Node >= 17: https://candid.technology/error-error-0308010c-digital-envelope-routines-unsupported/
 export NODE_OPTIONS=--openssl-legacy-provider
 npm run serve
 ```
-
-**NOTE:** Refer to the Agoston [quick start](https://docs.agoston.io/quickstart) for step by step tutorial.
 
 ## License
 
