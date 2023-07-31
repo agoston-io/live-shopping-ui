@@ -1,7 +1,7 @@
 <template>
     <main class="container" style="margin-top: 15%; margin-bottom: 5%;">
         <div class="row justify-content-center">
-            <div class="col-3 d-grid gap-2">
+            <div class="col-10 col-lg-3 d-grid gap-2">
                 <button class="btn btn-primary"
                     @click="$agostonClient.loginOrSignUpFromProvider({ strategyName: 'google-oauth20', options: { redirectSuccess: '/', redirectError: '/login' } })">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google"
