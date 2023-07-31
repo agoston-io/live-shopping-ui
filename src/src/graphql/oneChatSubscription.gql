@@ -1,7 +1,7 @@
-subscription oneChat($topic: String!, $broadcast_id: Int!) {
+subscription oneChat($topic: String!, $broadcastId: Int!) {
   listen(topic: $topic) {
     query {
-      oneChat: chats(condition: {broadcastId: $broadcast_id}, orderBy: CREATED_AT_ASC, last: 20) {
+      oneChat: chats(condition: {broadcastId: $broadcastId}, orderBy: CREATED_AT_ASC, last: 20) {
         nodes {
           content
           createdAt

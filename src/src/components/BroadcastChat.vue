@@ -1,5 +1,6 @@
 <template>
-  <div class="card bg-dark">
+  <div class="card bg-dark mt-3 mt-lg-0 p-0 p-lg-2">
+    <h5 class="card-title">Chat about {{ broadcastName }}...</h5>
     <div class="card-body" style="height: 390px; overflow-y: scroll; overflow-x: hidden" id="chat">
       <div class="col-12" v-if="$apollo.queries.oneChat.loading">
         Loading...
@@ -59,7 +60,7 @@ import CHAT_SEND_MESSAGE from "../graphql/chatAddMessage.gql";
 
 export default {
   name: "broadcast-chat",
-  props: ["broadcast_id"],
+  props: ["broadcastId", "broadcastName"],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -87,7 +88,7 @@ export default {
       query: ONE_CHAT,
       variables() {
         return {
-          broadcast_id: parseInt(this.broadcast_id),
+          broadcastId: parseInt(this.broadcastId),
         };
       },
       subscribeToMore: {
@@ -95,7 +96,7 @@ export default {
         variables() {
           return {
             topic: `chats`,
-            broadcast_id: parseInt(this.broadcast_id),
+            broadcastId: parseInt(this.broadcastId),
           };
         },
         updateQuery: (previousResult, { subscriptionData }) => {
@@ -124,7 +125,7 @@ export default {
             mutation: CHAT_SEND_MESSAGE,
             variables: {
               message: message,
-              broadcast_id: parseInt(this.broadcast_id),
+              broadcastId: parseInt(this.broadcastId),
             }
           })
           .then(() => {

@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="col-12 col-lg-4 bg-dark">
-              <BroadcastChat :broadcast_id="oneBroadcast.nodes[0].id" />
+              <BroadcastChat :broadcastId="oneBroadcast.nodes[0].id" :broadcastName="oneBroadcast.nodes[0].name" />
             </div>
           </div>
           <div class="row g-0 mt-2">

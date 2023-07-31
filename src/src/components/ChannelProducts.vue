@@ -1,4 +1,9 @@
 <template>
+  <div class="row g-0">
+    <div class="col fw-bold">
+      Other products
+    </div>
+  </div>
   <div class="row g-0" v-if="$apollo.queries.products.loading">Loading...</div>
   <div class="row g-0" v-else>
     <div class="col-12 col-lg-3 p-1" v-for="item in products.nodes" :key="item.id">

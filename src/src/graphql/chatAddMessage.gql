@@ -1,5 +1,5 @@
-mutation createChatMessage ($broadcast_id: Int!,$message: String!) {
-  createChat(input: {chat: {broadcastId: $broadcast_id, content: $message}}) {
+mutation createChatMessage ($broadcastId: Int!,$message: String!) {
+  createChat(input: {chat: {broadcastId: $broadcastId, content: $message}}) {
     chat {
       id
       content

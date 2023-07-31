@@ -1,6 +1,6 @@
-query oneChat($broadcast_id: Int!) {
+query oneChat($broadcastId: Int!) {
   oneChat: chats(
-    condition: {broadcastId: $broadcast_id}
+    condition: {broadcastId: $broadcastId}
     orderBy: CREATED_AT_ASC
     last: 20
   ) {
