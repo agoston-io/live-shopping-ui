@@ -6,20 +6,21 @@
         Loading...
       </div>
       <!---->
-      <div v-else v-for="item in oneChat.nodes" :key="item.id">
-        <div class="d-flex justify-content-between">
-          <p class="small mb-1">{{ item.user.username }}</p>
-          <p class="small mb-1 text-muted">
-            {{ tsToNiceElapsed(item.createdAt, "Now") }}
-          </p>
-        </div>
-        <div class="d-flex flex-row justify-content-start">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp" alt="avatar 1"
-            style="width: 45px; height: 100%" />
-          <div>
-            <p class="small p-2 ms-3 mb-3 rounded-3 bg-secondary">
-              {{ item.content }}
-            </p>
+      <div v-else v-for="item in  oneChat.nodes " :key="item.id">
+        <div v-if="tsToNiceElapsed(item.createdAt, 'Now') !== 'Now'">
+          <div class="d-flex justify-content-between">
+            <p class="small mb-1">{{ item.user.username }}</p>
+            <p class="small mb-1 text-muted">
+              {{ tsToNiceElapsed(item.createdAt, " Now") }} </p>
+          </div>
+          <div class="d-flex flex-row justify-content-start">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp" alt="avatar 1"
+              style="width: 45px; height: 100%" />
+            <div>
+              <p class="small p-2 ms-3 mb-3 rounded-3 bg-secondary">
+                {{ item.content }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
