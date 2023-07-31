@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-2" v-if="!isMobile()">
+    <div class="col-2 d-none d-lg-inline">
       <TopChannels />
     </div>
     <div class="col-12 col-lg-10 bg-dark">
@@ -28,7 +28,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-4 bg-dark" v-if="!isMobile()">
+            <div class="col-12 col-lg-4 bg-dark">
               <BroadcastChat :broadcast_id="oneBroadcast.nodes[0].id" />
             </div>
           </div>
