@@ -1,11 +1,11 @@
 export default () => {
-    return (v, v2) => {
+    return (v) => {
         if (!v) return "unknown";
         const date = new Date(v.toString());
         const currentDate = new Date();
         const elapsed_ms = currentDate - date;
         if (elapsed_ms <= 0) {
-            return v2
+            return '-1'
         }
         // Human readable
         var d, h, m, s;
