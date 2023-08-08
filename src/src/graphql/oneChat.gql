@@ -1,15 +1,14 @@
 query oneChat($broadcastId: Int!) {
-  oneChat: chats(
-    condition: {broadcastId: $broadcastId}
-    orderBy: CREATED_AT_ASC
-    last: 20
-  ) {
-    nodes {
-      content
-      createdAt
-      id
-      user {
-        username
+  oneChat: query {
+    currentTs
+    chats(condition: {broadcastId: $broadcastId}) {
+      nodes {
+        content
+        createdAt
+        id
+        user {
+          username
+        }
       }
     }
   }

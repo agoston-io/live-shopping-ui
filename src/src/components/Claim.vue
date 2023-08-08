@@ -73,8 +73,8 @@
                     rounded-pill
                     bg-primary
                   " style="margin-top: 15px; margin-right: 15px">
-                  <span v-if="tsToNiceElapsed(item.node.liveEndedAt) !== '-1'">
-                    {{ tsToNiceElapsed(item.node.liveEndedAt) }}
+                  <span v-if="tsToNiceElapsed(new Date(), item.node.liveEndedAt) !== '-1'">
+                    {{ tsToNiceElapsed(new Date(), item.node.liveEndedAt) }}
                   </span>
                   <span v-else>live</span>
                 </span>

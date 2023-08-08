@@ -1,3 +1,8 @@
+-- Return current database timestamp
+create or replace function current_ts() RETURNS timestamp with time zone AS $$
+select now()::timestamp;
+$$ LANGUAGE sql IMMUTABLE;
+
 create table agoston_public.users
 (
     -- Id from agoston_identity.user_identities (id)

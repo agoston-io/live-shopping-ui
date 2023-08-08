@@ -6,12 +6,12 @@
         Loading...
       </div>
       <!---->
-      <div v-else v-for="item in  oneChat.nodes " :key="item.id">
-        <div v-if="tsToNiceElapsed(item.createdAt) !== '-1'">
+      <div v-else v-for="item in oneChat.chats.nodes " :key="item.id">
+        <div v-if="tsToNiceElapsed(oneChat.currentTs, item.createdAt) !== '-1'">
           <div class="d-flex justify-content-between">
             <p class="small mb-1">{{ item.user.username }}</p>
             <p class="small mb-1 text-muted">
-              {{ tsToNiceElapsed(item.createdAt) }} </p>
+              {{ tsToNiceElapsed(oneChat.currentTs, item.createdAt) }} </p>
           </div>
           <div class="d-flex flex-row justify-content-start">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp" alt="avatar 1"

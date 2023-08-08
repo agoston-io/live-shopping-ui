@@ -1,8 +1,8 @@
 export default () => {
-    return (v) => {
-        if (!v) return "unknown";
+    return (t, v) => {
+        if (!v || !t) return "unknown";
+        const currentDate = new Date(t.toString());
         const date = new Date(v.toString());
-        const currentDate = new Date();
         const elapsed_ms = currentDate - date;
         if (elapsed_ms <= 0) {
             return '-1'
