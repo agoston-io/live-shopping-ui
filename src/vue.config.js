@@ -12,6 +12,23 @@ module.exports = {
         module: {
             rules: [
                 {
+                    test: /\.(?:js|mjs|cjs)$/,
+                    exclude: {
+                        and: [/node_modules/],
+                        not: [
+                            /@agoston-io\/client/,
+                        ]
+                    },
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['@babel/preset-env', { targets: "defaults" }]
+                            ]
+                        }
+                    }
+                },
+                {
                     test: /\.(gql|graphql)$/,
                     use: 'graphql-tag/loader'
                 }
