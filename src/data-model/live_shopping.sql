@@ -52,7 +52,7 @@ CREATE TABLE channels (
   id serial PRIMARY KEY,
   name text NOT NULL,
   user_id int NOT NULL,
-  CONSTRAINT channel_user_id FOREIGN KEY (user_id) REFERENCES agoston_identity.user_identities (id) ON DELETE CASCADE
+  CONSTRAINT channel_user_id FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
 CREATE INDEX ON channels (user_id);
 GRANT SELECT ON channels TO anonymous, authenticated;
@@ -78,7 +78,7 @@ CREATE TABLE chats (
   user_id int NOT NULL DEFAULT get_current_user_id(),
   content text NOT NULL CONSTRAINT chats_content CHECK (char_length(content) > 0 AND char_length(content) <= 1024),
   CONSTRAINT chat_broadcast_id FOREIGN KEY (broadcast_id) REFERENCES broadcasts (id) ON DELETE CASCADE,
-  CONSTRAINT chat_user_id FOREIGN KEY (user_id) REFERENCES agoston_identity.user_identities (id) ON DELETE CASCADE
+  CONSTRAINT chat_user_id FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
 CREATE INDEX ON chats (user_id);
 CREATE INDEX chats_broadcast_id ON chats (broadcast_id);

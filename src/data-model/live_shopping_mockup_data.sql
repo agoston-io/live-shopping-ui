@@ -32,7 +32,7 @@ begin
     ('{"attr1":"' || md5(random()::text) || '", "attr2":"' || md5(random()::text) || '"}')::jsonb
   );
   -- chats
-  for counter in 1.. ( select floor(random() * 10)) LOOP
+  for counter in 1.. ( select floor(random() * 10) +1 ) LOOP
     insert into chats values (
       nextval('chats_id_seq'),
       currval('broadcasts_id_seq'),
@@ -42,7 +42,7 @@ begin
     );
   END LOOP;
   -- products
-  for counter in 1.. ( select floor(random() * 10)) loop
+  for counter in 1.. ( select floor(random() * 10) +1 ) loop
     insert into products values (
       nextval('products_id_seq'),
       currval('channels_id_seq'),
@@ -62,6 +62,7 @@ begin
       set     created_at = v_created_at
       where   id = f.id;
   end loop;
+  update chats set created_at = CURRENT_TIMESTAMP where id = f.id;
   -- Update chat user id with random values
   for f in (select id from chats where broadcast_id = currval('broadcasts_id_seq')) loop
     update chats
