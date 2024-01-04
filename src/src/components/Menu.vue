@@ -39,7 +39,7 @@
           <img v-if="$agostonClient.userAuthData()._json?.picture !== undefined" class="img-fluid rounded-circle me-2"
             style="height: 30px;" :src="$agostonClient.userAuthData()._json.picture">
           <span class="fw-bold me-1">{{ $agostonClient.userAuthData().displayName }}</span>
-          | <a class="fw-bold" href="#" @click="$agostonClient.logout({ options: { redirectLogout: '/' } })">Logout</a>
+          | <a class="fw-bold" href="#" @click="logout">Logout</a>
         </div>
       </div>
     </div>
@@ -49,5 +49,16 @@
 <script>
 export default {
   name: "Menu",
+  methods: {
+    logout() {
+      this.$agostonClient.logout()
+        .then(session => {
+          console.log(`logout_success: ${JSON.stringify(session)}`)
+          window.location.href = '/';
+        }).catch(error => {
+          console.log(`logout_error: ${error}`)
+        });
+    }
+  }
 };
 </script>

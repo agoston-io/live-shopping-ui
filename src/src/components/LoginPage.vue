@@ -45,19 +45,21 @@ export default {
     },
     methods: {
         async loginWithUserPassword() {
-            var err = await this.$agostonClient.loginOrSignUpWithUserPassword({
+            this.$agostonClient.loginOrSignUpWithUserPassword({
                 username: this.loginUsername,
                 password: this.loginPassword,
-                data: {
-                    displayName: this.loginUsername,
+                options: {
+                    free_value: {
+                        displayName: this.loginUsername,
+                    },
+                    redirectSuccess: '/'
                 }
-            });
-            if (err) {
-                console.log(`Login error: ${err}`)
-            } else {
-                console.log("Login success")
+            }).then(session => {
+                console.log(`auth_success: ${JSON.stringify(session)}`)
                 window.location.href = '/';
-            }
+            }).catch(error => {
+                console.log(`auth_error: ${error}`)
+            });
         },
     }
 };
