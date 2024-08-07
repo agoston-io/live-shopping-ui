@@ -15,13 +15,17 @@ import { faThumbsUp, faAngleDoubleRight, faPhotoVideo, faSpinner } from "@fortaw
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 library.add(faTwitter, faLinkedin, faFacebook, faGithub, faThumbsUp, faAngleDoubleRight, faPhotoVideo, faSpinner, faPaperPlane);
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { createApolloProvider } from '@vue/apollo-option'
 
 // First creating the Agoston client with the backend URL from Agoston.
 AgostonClient({
     backendUrl: process.env.VUE_APP_AGOSTON_BACKEND_URL
 }).then(agostonClient => {
 
-    const apolloProvider = agostonClient.createEmbeddedApolloProvider();
+    const apolloClient = agostonClient.createEmbeddedApolloClient();
+    const apolloProvider = createApolloProvider({
+        defaultClient: apolloClient,
+    })
 
     // Then create the Vue app with the Agoston backend configuration.
     const app = createApp({

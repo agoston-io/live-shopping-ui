@@ -1,21 +1,29 @@
 <template>
   <div class="card bg-dark mt-3 mt-lg-0 p-0 p-lg-2">
     <h5 class="card-title">Chat about {{ broadcastName }}...</h5>
-    <div class="card-body" style="height: 390px; overflow-y: scroll; overflow-x: hidden" id="chat">
+    <div
+      class="card-body"
+      style="height: 390px; overflow-y: scroll; overflow-x: hidden"
+      id="chat"
+    >
       <div class="col-12" v-if="$apollo.queries.oneChat.loading">
         Loading...
       </div>
       <!---->
-      <div v-else v-for="item in oneChat.chats.nodes " :key="item.id">
+      <div v-else v-for="item in oneChat.chats.nodes" :key="item.id">
         <div v-if="tsToNiceElapsed(oneChat.currentTs, item.createdAt) !== '-1'">
           <div class="d-flex justify-content-between">
             <p class="small mb-1">{{ item.user.username }}</p>
             <p class="small mb-1 text-muted">
-              {{ tsToNiceElapsed(oneChat.currentTs, item.createdAt) }} </p>
+              {{ tsToNiceElapsed(oneChat.currentTs, item.createdAt) }}
+            </p>
           </div>
           <div class="d-flex flex-row justify-content-start">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp" alt="avatar 1"
-              style="width: 45px; height: 100%" />
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
+              alt="avatar 1"
+              style="width: 45px; height: 100%"
+            />
             <div>
               <p class="small p-2 ms-3 mb-3 rounded-3 bg-secondary">
                 {{ item.content }}
@@ -26,22 +34,40 @@
       </div>
       <!---->
     </div>
-    <div class="
-        card-footer
-        text-muted
-        justify-content-start
-        align-items-center
-        p-0
-      ">
+    <div
+      class="card-footer text-muted justify-content-start align-items-center p-0"
+    >
       <form @submit.prevent="onSubmit">
         <div class="input-group mb-0">
-          <input id="chatInput" type="text" class="form-control" v-model="v$.form.message.$model"
-            v-on:keyup.enter="postMessage" required />
-          <button v-if="$agostonClient.isAuthenticated()" :disabled="v$.form.$invalid" v-on:click="postMessage"
-            class="btn btn-primary" type="button" style="padding-top: 0.55rem">
+          <input
+            id="chatInput"
+            type="text"
+            class="form-control"
+            v-model="v$.form.message.$model"
+            v-on:keyup.enter="postMessage"
+            required
+          />
+          <button
+            v-if="$agostonClient.isAuthenticated()"
+            :disabled="v$.form.$invalid"
+            v-on:click="postMessage"
+            class="btn btn-primary"
+            type="button"
+            style="padding-top: 0.55rem"
+          >
             <font-awesome-icon class="me-1" :icon="['far', 'paper-plane']" />
           </button>
-          <router-link v-else class="btn btn-primary" :to="{ name: 'LoginPage' }">Login to chat</router-link>
+          <button
+            v-else
+            class="btn btn-primary"
+            @click="
+              $agostonClient.loginOrSignUpFromProvider({
+                options: { redirectSuccess: '/', redirectError: '/login' },
+              })
+            "
+          >
+            <span>Login</span>
+          </button>
         </div>
       </form>
     </div>
@@ -127,7 +153,7 @@ export default {
             variables: {
               message: message,
               broadcastId: parseInt(this.broadcastId),
-            }
+            },
           })
           .then(() => {
             this.form.message = "";
