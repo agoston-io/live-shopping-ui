@@ -3,19 +3,18 @@
 # abort on errors
 set -e
 
-cd ./src
-
 # cleanup
-rm -rf ./build
+rm -rf ./.npm
+rm -rf ./dist
 rm -rf ./node_modules
 
 # build
 npm ci --cache .npm --prefer-offline --silent --no-optional
 npm ci @vue/cli --cache .npm --prefer-offline --silent
-npm run build-prod
+npm run build
 
 # navigate into the build output directory
-cd build
+cd dist
 
 echo 'live-shopping-ui.agoston.io' > CNAME
 
