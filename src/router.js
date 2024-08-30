@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LandingPage from "@/components/LandingPage";
-import NotFound from "@/components/NotFound";
+import LandingPage from "@/components/LandingPage.vue";
+import NotFound from "@/components/NotFound.vue";
 
 const routes = [
     {

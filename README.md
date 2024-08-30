@@ -22,7 +22,7 @@ Basic Live shopping was developed with Vue for the frontend and Agoston for the 
 3. Adujst the environment variables in `src/.env` to fit your Agoston environment:
 
 ```env
-VUE_APP_AGOSTON_BACKEND_URL='<AGOSTON_BACKEND_URL>'
+VITE_AGOSTON_BACKEND_URL='<AGOSTON_BACKEND_URL>'
 ```
 
 4. Run the frontend

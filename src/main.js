@@ -19,7 +19,7 @@ import { createApolloProvider } from '@vue/apollo-option'
 
 // First creating the Agoston client with the backend URL from Agoston.
 AgostonClient({
-    backendUrl: process.env.VUE_APP_AGOSTON_BACKEND_URL
+    backendUrl: import.meta.env.VITE_AGOSTON_BACKEND_URL
 }).then(agostonClient => {
 
     const apolloClient = agostonClient.createEmbeddedApolloClient();
