@@ -3,7 +3,13 @@
     <h5 class="card-title">Chat about {{ broadcastName }}...</h5>
     <div
       class="card-body"
-      style="height: 390px; overflow-y: scroll; overflow-x: hidden"
+      style="
+        height: 390px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column-reverse;
+      "
       id="chat"
     >
       <div class="col-12" v-if="$apollo.queries.oneChat.loading">
@@ -130,17 +136,6 @@ export default {
           return subscriptionData.data.listen.query;
         },
       },
-    },
-  },
-  watch: {
-    oneChat: {
-      handler: function () {
-        setTimeout(function () {
-          let chat = document.getElementById("chat");
-          chat.scrollTop = chat.scrollHeight;
-        }, 50);
-      },
-      deep: true,
     },
   },
   methods: {

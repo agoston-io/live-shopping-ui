@@ -9,7 +9,7 @@
     "deploy": "./push_online.sh"
   },
   "dependencies": {
-    "@agoston-io/client": "^1.3.0",
+    "@agoston-io/client": "^1.3.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",

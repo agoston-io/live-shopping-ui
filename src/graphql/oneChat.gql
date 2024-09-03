@@ -1,7 +1,7 @@
 query oneChat($broadcastId: Int!) {
   oneChat: query {
     currentTs
-    chats(condition: {broadcastId: $broadcastId}) {
+    chats(condition: { broadcastId: $broadcastId }, orderBy: CREATED_AT_DESC) {
       nodes {
         content
         createdAt

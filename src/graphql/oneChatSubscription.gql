@@ -2,7 +2,10 @@ subscription oneChat($topic: String!, $broadcastId: Int!) {
   listen(topic: $topic) {
     oneChat: query {
       currentTs
-      chats(condition: {broadcastId: $broadcastId}) {
+      chats(
+        condition: { broadcastId: $broadcastId }
+        orderBy: CREATED_AT_DESC
+      ) {
         nodes {
           content
           createdAt
@@ -15,4 +18,3 @@ subscription oneChat($topic: String!, $broadcastId: Int!) {
     }
   }
 }
-
